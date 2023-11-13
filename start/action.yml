@@ -78,7 +78,7 @@ runs:
         sudo /Applications/Docker.app/Contents/MacOS/install config --user runner
         sudo /Applications/Docker.app/Contents/MacOS/install vmnetd
         echo "app installed"
-        /usr/bin/open /Applications/Docker.app --args --unattended --add-host-docker-internal-registry --telemetry=false
+        /usr/bin/open /Applications/Docker.app --args --unattended --add-host-docker-internal-registry --telemetry
         echo "Docker starting..."
         sleep 90
         cat ~/Library/Containers/com.docker.docker/Data/log/host/Docker.log
