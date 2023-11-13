@@ -85,6 +85,9 @@ runs:
         echo "app installed"
         /usr/bin/open /Applications/Docker.app --args --unattended --add-host-docker-internal-registry
         echo "Docker starting..."
+        sleep 10
+        cat ~/Library/Containers/com.docker.docker/Data/log/host/Docker.log
+        cat ~/Library/Containers/com.docker.docker/Data/log/host/com.docker.backend.log
 
     - name: Download appcast
       if: runner.os == 'Linux'
