@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, mac-testing]
   pull_request:
 
 jobs:
@@ -11,15 +11,15 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu22_16cores_64gb ] #, macos-latest ]
-        build-url: [ "latest", "https://desktop.docker.com/linux/main/amd64/122432/docker-desktop-4.24.0-amd64.deb" ]
+        os: [ ubuntu22_16cores_64gb, macos-latest ]
+        build-url: [ "latest" ]
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
       - name: Start Desktop
         uses: ./start
-        timeout-minutes: 5
+        timeout-minutes: 3
         with:
           docker-desktop-build-url: ${{ matrix.build-url }}
 
@@ -29,6 +29,7 @@ jobs:
       - name: Docker Desktop info
         run: docker info
 
-      - name: Gather Diagnostics
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
         if: ${{ failure() }}
-        run: /opt/docker-desktop/bin/com.docker.diagnose gather -upload
+        timeout-minutes: 60
