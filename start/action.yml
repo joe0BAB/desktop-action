@@ -80,7 +80,7 @@ runs:
         echo "app installed"
         /usr/bin/open /Applications/Docker.app --args --unattended --add-host-docker-internal-registry
         echo "Docker starting..."
-        sleep 10
+        sleep 90
         cat ~/Library/Containers/com.docker.docker/Data/log/host/Docker.log
         cat ~/Library/Containers/com.docker.docker/Data/log/host/com.docker.backend.log
 
@@ -168,9 +168,3 @@ runs:
         until docker ps; do echo "docker not ready, sleep 10 s and try again"; sleep 10; done
         echo "Docker started and ready"
 
-    - name: Wait for Docker to be up and running
-      shell: bash
-      run: |
-        until docker ps; do echo "docker not ready, sleep 10 s and try again"; sleep 10; done
-        echo "Docker started and ready"
-        docker version
