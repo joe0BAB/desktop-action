@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu22_16cores_64gb, macos-latest ]
+        os: [  macos-latest ]
         build-url: [ "latest" ]
     timeout-minutes: 20
     steps:
@@ -23,11 +23,8 @@ jobs:
         with:
           docker-desktop-build-url: ${{ matrix.build-url }}
 
-      - name: Docker Desktop version
-        run: docker version >> $GITHUB_STEP_SUMMARY
-
       - name: Docker Desktop info
-        run: docker info
+        run: foo
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3

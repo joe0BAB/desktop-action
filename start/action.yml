@@ -8,6 +8,11 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Bloc calls to segment.io
+      id: redirect-segment
+      shell: bash
+      run: |
+        echo '127.0.0.2 api.segment.io' | sudo tee -a /etc/hosts
 
     - name: Get Date
       if: runner.os == 'macOS'
@@ -80,9 +85,6 @@ runs:
         echo "app installed"
         /usr/bin/open /Applications/Docker.app --args --unattended --add-host-docker-internal-registry
         echo "Docker starting..."
-        sleep 90
-        cat ~/Library/Containers/com.docker.docker/Data/log/host/Docker.log
-        cat ~/Library/Containers/com.docker.docker/Data/log/host/com.docker.backend.log
 
     - name: Download appcast
       if: runner.os == 'Linux'
